@@ -20,5 +20,5 @@ Class Person
     }
 }
 
-$obj = new Person("dd");
+$obj = new Person();
 echo $obj;
