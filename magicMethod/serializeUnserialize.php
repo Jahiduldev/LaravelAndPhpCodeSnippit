@@ -1,15 +1,29 @@
 <?php
 
-class Person
-{
-    public $name = "Jahidul";
-    public $age = 36;
+class MyClass {
+    public $data;
+
+    public function __construct($data) {
+        $this->data = $data;
+    }
+
+    public function __serialize(): array {
+        // Define what needs to be serialized
+        return ['data' => $this->data];
+    }
+
+    public function __unserialize(array $data): void {
+        // Define how to restore object state from serialized data
+        $this->data = $data['data'];
+    }
 }
 
-$person = new Person();
-$serialize = serialize($person);
+// Create an object
+$obj = new MyClass('Hello, serialization!');
 
-// Unserialize the serialized string
-$unserializedPerson = unserialize($serialize);
+// Serialize the object (hypothetical usage)
+$serializedObj = serialize($obj);
 
-var_dump($unserializedPerson);
+// Unserialize the object (hypothetical usage)
+$unserializedObj = unserialize($serializedObj);
+var_dump($unserializedObj);
